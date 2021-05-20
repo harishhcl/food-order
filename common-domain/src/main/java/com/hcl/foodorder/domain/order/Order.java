@@ -19,5 +19,9 @@ public class Order {
 	private Long id;
 	private String orderNumber;
 	private Set<MenuItem> itemList;
+	private OrderStatus status;
+	private Double total;
+	private Double taxPercentage;
+	private Double totalTaxAmount;
 	
 }

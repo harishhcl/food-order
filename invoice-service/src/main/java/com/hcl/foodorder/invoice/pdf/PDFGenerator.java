@@ -5,13 +5,17 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.itextpdf.text.BadElementException;
+import com.hcl.foodorder.domain.order.Order;
+import com.hcl.foodorder.domain.order.OrderStatus;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -19,52 +23,76 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 @Component
 public class PDFGenerator {
-	public static void main(String[] args) throws DocumentException, URISyntaxException, IOException {
-		
-		PDFGenerator pdfGenerator =new PDFGenerator();
-		
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(PDFGenerator.class);
+
+	public void generatePDFReport(Order order) throws DocumentException, IOException {
 		Document document = new Document();
-		PdfWriter.getInstance(document, new FileOutputStream("D:/HCL/invoiceReport.pdf"));
+		PdfWriter.getInstance(document, new FileOutputStream("D:/HCL/invoiceReport" + order.getOrderNumber() + ".pdf"));
 		document.open();
 
-		PdfPTable table = new PdfPTable(3);
-		pdfGenerator.addTableHeader(table);
-		pdfGenerator.addRows(table);
-		pdfGenerator.addCustomRows(table);
+		// Invoice Header
+		Paragraph paragraph = new Paragraph("Invoice Order : " + order.getOrderNumber());
+		paragraph.setAlignment(Element.ALIGN_CENTER);
+		document.add(paragraph);
 
-		document.add(table);
+		// Customer Details
+		paragraph = new Paragraph("Customer Details : ");
+		paragraph.setAlignment(Element.ALIGN_LEFT);
+		document.add(paragraph);
 
-		document.close();
-		
-		System.out.println("PDF Generation..!");
-		
-	}
+		paragraph = new Paragraph("----------------------------");
+		paragraph.setAlignment(Element.ALIGN_CENTER);
+		document.add(paragraph);
 
-	private void addTableHeader(PdfPTable table) {
-		Stream.of("column header 1", "column header 2", "column header 3").forEach(columnTitle -> {
+		// Restaurant Details
+		paragraph = new Paragraph("Restaurant Details : ");
+		// paragraph.setFont(FontFamily.TIMES_ROMAN);
+		paragraph.setAlignment(Element.ALIGN_LEFT);
+		document.add(paragraph);
+
+		paragraph = new Paragraph("----------------------------");
+		paragraph.setAlignment(Element.ALIGN_CENTER);
+		document.add(paragraph);
+
+		paragraph = new Paragraph("Ordered Items");
+		paragraph.setAlignment(Element.ALIGN_CENTER);
+		document.add(paragraph);
+
+		// Order List
+		PdfPTable table = new PdfPTable(4);
+		// Table Header
+		Stream.of("Item Name", "Price", "Quantity", "Total Price").forEach(columnTitle -> {
 			PdfPCell header = new PdfPCell();
 			header.setBackgroundColor(BaseColor.LIGHT_GRAY);
-			header.setBorderWidth(2);
+			header.setBorderWidth(1.5f);
 			header.setPhrase(new Phrase(columnTitle));
 			table.addCell(header);
 		});
+
+		for (int i = 1; i <= 10; i++) {
+			// Table Body
+			table.addCell("Product Name " + i);
+			table.addCell(String.valueOf(i * 100));
+			table.addCell(String.valueOf(i));
+			table.addCell(String.valueOf((i * 100) * i));
+		}
+		document.add(table);
+		document.close();
 	}
-
-	private void addRows(PdfPTable table) {
-		table.addCell("row 1, col 1");
-		table.addCell("row 1, col 2");
-		table.addCell("row 1, col 3");
-	}
-
-	private void addCustomRows(PdfPTable table) throws URISyntaxException, BadElementException, IOException {
-
-		PdfPCell horizontalAlignCell = new PdfPCell(new Phrase("row 2, col 2"));
-		horizontalAlignCell.setHorizontalAlignment(Element.ALIGN_CENTER);
-		table.addCell(horizontalAlignCell);
-
-		PdfPCell verticalAlignCell = new PdfPCell(new Phrase("row 2, col 3"));
-		verticalAlignCell.setVerticalAlignment(Element.ALIGN_BOTTOM);
-		table.addCell(verticalAlignCell);
-		
-	}
+	/*
+	 * public static void main(String[] args) throws DocumentException,
+	 * URISyntaxException, IOException {
+	 * 
+	 * PDFGenerator pdfGenerator = new PDFGenerator(); Order order = new Order();
+	 * order.setId(1234567890L); order.setOrderNumber("ABC1234567890");
+	 * order.setStatus(OrderStatus.CREATED); order.setTaxPercentage(5.0);
+	 * order.setTotal(10000.0); order.setTotalTaxAmount(50.0);
+	 * 
+	 * pdfGenerator.generatePDFReport(order);
+	 * 
+	 * LOGGER.info("PDF Generation..!");
+	 * 
+	 * }
+	 */
 }
