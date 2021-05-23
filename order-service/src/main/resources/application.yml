@@ -1,5 +1,7 @@
 server:
   port: 8085
 
-spring:  data:    mongodb:
+spring:
+  application:
+    name: gateway-service  data:    mongodb:
       uri: mongodb://localhost:27017/food_order

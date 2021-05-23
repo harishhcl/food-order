@@ -6,19 +6,7 @@ spring:
   cloud:
     gateway:
       routes:
-      - id: customerService
-        uri: http://localhost:8081/
-        predicates:
-        - Path=/customers/v1/**
-      - id: driverService
-        uri: http://localhost:8082/
-        predicates:
-        - Path=/drivers/v1/**
-      - id: restaurantService
-        uri: http://localhost:8082/
-        predicates:
-        - Path=/restaurants/v1/**
-      - id: restaurantService
-        uri: http://localhost:8082/
+      - id: orderService
+        uri: http://localhost:8085/
         predicates:
         - Path=/orders/v1/**

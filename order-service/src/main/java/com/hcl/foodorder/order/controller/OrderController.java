@@ -12,25 +12,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcl.foodorder.domain.exception.DuplicateOrderCreationException;
+import com.hcl.foodorder.domain.exception.OrderDetailsNotFoundException;
 import com.hcl.foodorder.domain.order.Order;
 import com.hcl.foodorder.order.service.OrderService;
 
 @RestController
-@RequestMapping("v1/orders")
+@RequestMapping("orders/v1")
 public class OrderController {
 	
 	@Autowired
 	private OrderService orderService;
 
 	@PostMapping("/create")
-	public ResponseEntity<Order> create(@RequestBody Order order) {
+	public ResponseEntity<Order> create(@RequestBody Order order) throws DuplicateOrderCreationException {
 		Order orderDetails = orderService.create(order);
 		return new ResponseEntity<>(orderDetails, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/get/restaurants/{restaurantId}")
-	public ResponseEntity<List<Order>> getRestaurantOrders(@PathVariable("restaurantId") Long restaurantId) {
+	public ResponseEntity<List<Order>> getRestaurantOrders(@PathVariable("restaurantId") Long restaurantId) throws OrderDetailsNotFoundException {
 		List<Order> orders = orderService.getOrdersByRestaurant(restaurantId);
+		return new ResponseEntity<>(orders, HttpStatus.OK);
+	}
+	
+
+	@GetMapping("/get/customers/{customerId}")
+	public ResponseEntity<List<Order>> getCustomerOrders(@PathVariable("customerId") Long customerId) throws OrderDetailsNotFoundException {
+		List<Order> orders = orderService.getOrdersByCustomer(customerId);
 		return new ResponseEntity<>(orders, HttpStatus.OK);
 	}
 	

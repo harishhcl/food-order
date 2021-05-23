@@ -1,9 +1,10 @@
 package com.hcl.foodorder.domain.order;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.hcl.foodorder.domain.restaurant.MenuItem;
@@ -15,9 +16,10 @@ import lombok.Data;
 public class Order {
 	@Id
 	private Long id;
-	private String orderNumber;
-	private LocalDateTime createdDate;
-	private LocalDateTime lastUpdatedDate;
+	@Indexed(unique = true)
+	private Long orderNumber;
+	private Date createdDate;
+	private Date lastUpdatedDate;
 	private Set<MenuItem> itemList;
 	private OrderStatus status;
 	private Double total;

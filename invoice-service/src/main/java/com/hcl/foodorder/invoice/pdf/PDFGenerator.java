@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.hcl.foodorder.domain.order.Order;
+import com.hcl.foodorder.domain.restaurant.MenuItem;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -45,7 +46,6 @@ public class PDFGenerator {
 
 		// Restaurant Details
 		paragraph = new Paragraph("Restaurant Details : ");
-		// paragraph.setFont(FontFamily.TIMES_ROMAN);
 		paragraph.setAlignment(Element.ALIGN_LEFT);
 		document.add(paragraph);
 
@@ -68,12 +68,12 @@ public class PDFGenerator {
 			table.addCell(header);
 		});
 
-		for (int i = 1; i <= 10; i++) {
+		for (MenuItem item : order.getItemList()) {
 			// Table Body
-			table.addCell("Product Name " + i);
-			table.addCell(String.valueOf(i * 100));
-			table.addCell(String.valueOf(i));
-			table.addCell(String.valueOf((i * 100) * i));
+			table.addCell(item.getName());
+			table.addCell(String.valueOf(item.getPrice()));
+			table.addCell(String.valueOf(item.getQuantity()));
+			table.addCell(String.valueOf(item.getQuantity()*item.getPrice()));
 		}
 		document.add(table);
 		document.close();
