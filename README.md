@@ -1,77 +1,83 @@
 ## food-order
 
-## create request uri
-http://localhost:8085/orders/v1/create
+## Create Restaurant 
+http://localhost:8081/restaurants/v1/create
 
-##Via Gateway API
-http://localhost:8081/orders/v1/create
-
-## Create input request
+#Request:
     {
-    "id":2,
-    "orderNumber":50003,
-    "itemList":[
-        {
-            "id":2001,
-            "name":"Non Veg Biryani",
-            "description":"Hyderabad Chicken Biryani",
-            "price":300.00
-        },
-        {
-            "id":2003,
-            "name":"Veg Starter",
-            "description":"Spicy veg starter ",
-            "price":100.00
-        },
-        {
-            "id":2002,
-            "name":"Veg Biryani",
-            "description":" Veg Biryani",
-            "price":200.00
+        "id": 90002,
+        "name":"Hyderabad Baryani",
+        "description":"Baryani Point Bangalore",
+        "address":{
+        "id":123,
+        "type":"RESTAURANT",
+        "street":"Silkboard",
+        "city":"Bangalore",
+        "state":"Karnataka",
+        "pincode":123455
         }
-    ],
-    "status":"CREATED",
-    "total":630.00,
-    "taxPercentage":5.00,
-    "totalTaxAmount":30.00,
-    "restaurantId":1003,
-    "customerId":3003,
-    "driverId":4003
     }
 
-## Get response
-http://localhost:8085/orders/v1/get/restaurants/1001
+## Get Restaurant
 
-http://localhost:8081/orders/v1/get/restaurants/1003
+http://localhost:8082/restaurants/v1/get/90002
 
-## Get Response
-   
+#Response:
+
+    {
+        "id": 90002,
+        "name": "Hyderabad Baryani",
+        "description": "Baryani Point Bangalore",
+        "address": {
+            "id": 123,
+            "type": "RESTAURANT",
+            "street": "Silkboard",
+            "city": "Bangalore",
+            "state": "Karnataka",
+            "pincode": "123455"
+        }
+    }
+
+## Create Menu
+
+http://localhost:8082/restaurants/v1/create/90001/menu
+
+#Request:
+
     [
         {
-            "id": 1,
-            "orderNumber": "50002",
-            "createdDate": "2021-05-22T18:59:24.017",
-            "lastUpdatedDate": "2021-05-22T18:59:24.017",
-            "itemList": [
-                {
-                    "id": 2002,
-                    "name": "Veg Biryani",
-                    "description": " Veg Biryani",
-                    "price": 200.0
-                },
-                {
-                    "id": 2001,
-                    "name": "Non Veg Biryani",
-                    "description": "Hyderabad Chicken Biryani",
-                    "price": 300.0
-                }
-            ],
-            "status": "CREATED",
-            "total": 325.0,
-            "taxPercentage": 5.0,
-            "totalTaxAmount": 25.0,
-            "restaurantId": 1001,
-            "customerId": 3001,
-            "driverId": 4001
+        "id":5001,
+        "name":"Chicken Biryani",
+        "description":"Non-veg Chicken Biryani",
+        "price":300.00,
+        "quantity":1
+    }
+    ]
+
+#Response:
+
+    [
+        {
+            "id": 5001,
+            "restaurantId": 90001,
+            "name": "Chicken Biryani",
+            "description": "Non-veg Chicken Biryani",
+            "price": 300.0,
+            "quantity": 1
+        }
+    ]
+
+#Get Restaurant Menu
+http://localhost:8082/restaurants/v1/get/90001/menu
+
+#Response:
+    [
+        {
+            "id": 5001,
+            "restaurantId": 90001,
+            "name": "Chicken Biryani",
+            "description": "Non-veg Chicken Biryani",
+            "price": 300.0,
+            "quantity": 1
         }
     ]
