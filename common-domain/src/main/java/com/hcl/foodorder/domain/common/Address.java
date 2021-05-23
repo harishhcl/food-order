@@ -1,6 +1,4 @@
-package com.hcl.foodorder.domain.restaurant;
-
-import java.util.Set;
+package com.hcl.foodorder.domain.common;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,18 +6,17 @@ import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.hcl.foodorder.domain.common.Address;
-
 import lombok.Data;
 
 @Data
 @Document
-public class Restaurant {
+public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String description;
-	private Set<MenuItem> items;
-	private Address address;
+	private AddressType type;
+	private String street;
+	private String city;
+	private String state;
+	private String pincode;
 }

@@ -1,4 +1,4 @@
-package com.hcl.foodorder.order.exception;
+package com.hcl.foodorder.domain.exception;
 
 public class OrderDetailsNotFoundException extends Exception {
 	

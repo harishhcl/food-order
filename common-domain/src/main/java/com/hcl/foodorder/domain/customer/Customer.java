@@ -1,6 +1,4 @@
-package com.hcl.foodorder.domain.restaurant;
-
-import java.util.Set;
+package com.hcl.foodorder.domain.customer;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,12 +12,11 @@ import lombok.Data;
 
 @Data
 @Document
-public class Restaurant {
+public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String description;
-	private Set<MenuItem> items;
-	private Address address;
+	private String email;
+	private Address adress;
 }

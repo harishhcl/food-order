@@ -5,13 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.hcl.foodorder.order.exception.OrderDetailsNotFoundException;
+import com.hcl.foodorder.domain.exception.OrderDetailsNotFoundException;
 
 @RestControllerAdvice
 public class OrderControllerAdvice {
 	@ExceptionHandler(OrderDetailsNotFoundException.class)
 	public ResponseEntity<String> orderDetailsNotFoundException(OrderDetailsNotFoundException exception) {
-		return new ResponseEntity<String>(exception.toString(), HttpStatus.EXPECTATION_FAILED) ;
+		return new ResponseEntity<>(exception.toString(), HttpStatus.EXPECTATION_FAILED) ;
 		
 	}
 }

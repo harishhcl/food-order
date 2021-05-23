@@ -1,27 +1,30 @@
 package com.hcl.foodorder.domain.order;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.hcl.foodorder.domain.restaurant.MenuItem;
 
 import lombok.Data;
 
 @Data
-@Entity
+@Document
 public class Order {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String orderNumber;
+	private LocalDateTime createdDate;
+	private LocalDateTime lastUpdatedDate;
 	private Set<MenuItem> itemList;
 	private OrderStatus status;
 	private Double total;
 	private Double taxPercentage;
 	private Double totalTaxAmount;
-	
+	private Long restaurantId;
+	private Long customerId;
+	private Long driverId;
+
 }

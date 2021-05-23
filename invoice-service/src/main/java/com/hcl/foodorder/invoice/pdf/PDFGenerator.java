@@ -2,7 +2,6 @@ package com.hcl.foodorder.invoice.pdf;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.stream.Stream;
 
 import org.slf4j.Logger;
@@ -10,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.hcl.foodorder.domain.order.Order;
-import com.hcl.foodorder.domain.order.OrderStatus;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;

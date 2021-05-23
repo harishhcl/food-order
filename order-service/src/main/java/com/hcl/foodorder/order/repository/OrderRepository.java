@@ -1,11 +1,19 @@
 package com.hcl.foodorder.order.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.hcl.foodorder.domain.order.Order;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends MongoRepository<Order, Long> {
+	
+	Optional<Order> findById(Long id);
+	List<Order> findByRestaurantId(Long restaurantId);
+	List<Order> findByCustomerId(Long customerId);
+	List<Order> findByDriverId(Long driverId);
 	
 }
