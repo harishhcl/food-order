@@ -10,6 +10,7 @@ import lombok.Data;
 public class MenuItem {
 	@Id
 	private Long id;
+	private Long restaurantId;
 	private String name;
 	private String description;
 	private Double price;

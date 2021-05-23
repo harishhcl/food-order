@@ -42,6 +42,13 @@ public class OrderController {
 		List<Order> orders = orderService.getOrdersByCustomer(customerId);
 		return new ResponseEntity<>(orders, HttpStatus.OK);
 	}
+
+	@GetMapping("/get/orders/{orderNumber}")
+	public ResponseEntity<List<Order>> getOrders(@PathVariable("orderNumber") Long orderNumber) throws OrderDetailsNotFoundException {
+		List<Order> orders = orderService.getOrdersByOrderNumber(orderNumber);
+		return new ResponseEntity<>(orders, HttpStatus.OK);
+	}
+	
 	
 	
 	

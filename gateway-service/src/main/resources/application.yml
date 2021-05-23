@@ -9,4 +9,8 @@ spring:
       - id: orderService
         uri: http://localhost:8085/
         predicates:
-        - Path=/orders/v1/**
+        - Path=/orders/v1/**
+      - id: restaurantService
+        uri: http://localhost:8082/
+        predicates:
+        - Path=/restaurants/v1/**

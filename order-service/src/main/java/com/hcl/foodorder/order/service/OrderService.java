@@ -44,4 +44,12 @@ public class OrderService {
 		return orderDetails;
 	}
 
+	public List<Order> getOrdersByOrderNumber(Long orderNumber) throws OrderDetailsNotFoundException {
+		List<Order> orderDetails = orderRepository.findByOrderNumber(orderNumber);
+		if(CollectionUtils.isEmpty(orderDetails))
+			throw new OrderDetailsNotFoundException("Order Details Not Available For orderNumber " + orderNumber);
+		
+		return orderDetails;
+	}
+
 }
