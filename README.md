@@ -1,9 +1,10 @@
-# food-order
+## food-order
 
-#create request uri
+## create request uri
 http://localhost:8085/v1/orders/create
 
-#Create input request
+## Create input request
+```json
 {
 "id":1,
 "orderNumber":50002,
@@ -29,11 +30,13 @@ http://localhost:8085/v1/orders/create
 "customerId":3001,
 "driverId":4001
 }
+...
 
-#get response
+## Get response
 http://localhost:8085/v1/orders/get/restaurants/1001
 
-#Get Response
+## Get Response
+```json
 [
     {
         "id": 1,
@@ -63,3 +66,4 @@ http://localhost:8085/v1/orders/get/restaurants/1001
         "driverId": 4001
     }
 ]
+```
