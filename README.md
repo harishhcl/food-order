@@ -66,4 +66,3 @@ http://localhost:8085/v1/orders/get/restaurants/1001
             "driverId": 4001
         }
     ]
-```
