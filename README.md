@@ -4,7 +4,7 @@
 http://localhost:8085/v1/orders/create
 
 ## Create input request
-    ```json
+    
     {
     "id":1,
     "orderNumber":50002,
@@ -36,7 +36,7 @@ http://localhost:8085/v1/orders/create
 http://localhost:8085/v1/orders/get/restaurants/1001
 
 ## Get Response
-    ```json
+   
     [
         {
             "id": 1,
