@@ -193,3 +193,38 @@ http://localhost:8081/orders/v1/get/restaurants/1001
             "driverId": 4002
         }
     ]
+
+## Invoice-Service
+
+##Generate Order Invoice Report
+    http://localhost:8086/invoices/v1/generateOrder
+## Request
+
+    {
+       "id":1,
+       "orderNumber":200001,
+       "createdDate":"2021-05-23T03:40:54.048+00:00",
+       "lastUpdatedDate":"2021-05-23T03:40:54.048+00:00",
+       "itemList":[
+          {
+             "id":1,
+             "restaurantId":300001,
+             "name":"Biryani",
+             "description":"Veg Biryani",
+             "price":200.00,
+             "quantity":1
+          },
+          {
+             "id":2,
+             "restaurantId":300001,
+             "name":"Non Veg Biryani",
+             "description":"Non Veg Biryani",
+             "price":300.00,
+             "quantity":1
+          }
+       ],
+       "status":"CREATED",
+       "taxPercentage":5.00,
+       "restaurantId":300001,
+       "customerId":987654
+    }
