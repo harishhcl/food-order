@@ -8,9 +8,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.hcl.foodorder.domain.common.Address;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Document
 public class Restaurant {
 	@Id
@@ -18,5 +24,6 @@ public class Restaurant {
 	private Long id;
 	private String name;
 	private String description;
+	private String mobileNumber;
 	private Address address;
 }

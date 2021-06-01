@@ -2,10 +2,10 @@ package com.hcl.foodorder.driver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-@SpringBootApplication
-@EnableEurekaClient
+//@EnableEurekaClient
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class DriverServiceApplication {
 
 	public static void main(String[] args) {

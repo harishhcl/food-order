@@ -1,1 +1,12 @@
 
+server:
+  port: 9095
+
+spring:
+  application:
+    name: driver-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/food_order
+freedriver:
+  distance: 5      

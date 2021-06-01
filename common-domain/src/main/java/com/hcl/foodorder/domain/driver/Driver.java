@@ -1,4 +1,4 @@
-package com.hcl.foodorder.domain.customer;
+package com.hcl.foodorder.domain.driver;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +18,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Document
-public class Customer {
+public class Driver {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -26,4 +26,5 @@ public class Customer {
 	private String email;
 	private String mobileNumber;
 	private Address adress;
+	private CurrentLocation currentLocation;
 }
