@@ -1,7 +1,7 @@
 ## food-order
 
 ## Create Restaurant 
-http://localhost:8081/restaurants/v1/create
+http://localhost:8080/restaurants/v1/create
 
 #Request:
 
@@ -21,7 +21,7 @@ http://localhost:8081/restaurants/v1/create
 
 ## Get Restaurant
 
-http://localhost:8082/restaurants/v1/get/90002
+http://localhost:8080/restaurants/v1/get/90002
 
 #Response:
 
@@ -41,7 +41,7 @@ http://localhost:8082/restaurants/v1/get/90002
 
 ## Create Menu
 
-http://localhost:8082/restaurants/v1/create/90001/menu
+http://localhost:8080/restaurants/v1/create/90001/menu
 
 #Request:
 
@@ -69,7 +69,7 @@ http://localhost:8082/restaurants/v1/create/90001/menu
     ]
 
 #Get Restaurant Menu
-http://localhost:8082/restaurants/v1/get/90001/menu
+http://localhost:8080/restaurants/v1/get/90001/menu
 
 #Response:
 
@@ -85,7 +85,7 @@ http://localhost:8082/restaurants/v1/get/90001/menu
     ]
 
 ## Create Order
-http://localhost:8081/orders/v1/create
+http://localhost:8080/orders/v1/create
 
 ## Order Request
 
@@ -122,7 +122,7 @@ http://localhost:8081/orders/v1/create
     }
     
 ## Create Order
-http://localhost:8081/orders/v1/get/restaurants/1001
+http://localhost:8080/orders/v1/get/restaurants/1001
 
 ## Order Request 
 
@@ -197,7 +197,7 @@ http://localhost:8081/orders/v1/get/restaurants/1001
 ## Invoice-Service
 
 ##Generate Order Invoice Report
-    http://localhost:8086/invoices/v1/generateOrder
+    http://localhost:8080/invoices/v1/generateOrder
 ## Request
 
     {
@@ -231,7 +231,7 @@ http://localhost:8081/orders/v1/get/restaurants/1001
 
 # Driver Service
 ## Create Driver
-  ## Request URL http://localhost:9095/drivers/v1/create
+  ## Request URL http://localhost:8080/drivers/v1/create
   ## Request Body
     {
         "id":1002,
@@ -278,7 +278,7 @@ http://localhost:8081/orders/v1/get/restaurants/1001
     }
     
    ## Get Driver Details Based on Mobile Number
-   ## Request URL http://localhost:9095/drivers/v1/get/8888888888
+   ## Request URL http://localhost:8080/drivers/v1/get/8888888888
    ## Response
         {
             "id": 1002,
@@ -303,7 +303,7 @@ http://localhost:8081/orders/v1/get/restaurants/1001
         }
         
  ## Get Available Drivers Based on DriverStatus== FREE
- ## Request URL http://localhost:9095/drivers/v1/getavaiabledrivers
+ ## Request URL http://localhost:8080/drivers/v1/getavaiabledrivers
  ## Response
         [
         {
@@ -351,7 +351,7 @@ http://localhost:8081/orders/v1/get/restaurants/1001
     ] 
     
  ## Get the Drivers Near to Restaurant 
- ## Request URL http://localhost:9095/drivers/v1/getavaiabledrivers?lat=10.123456&lon=11.32145&dis=7
+ ## Request URL http://localhost:8080/drivers/v1/getavaiabledrivers?lat=10.123456&lon=11.32145&dis=7
  ## Response
     [
     {
