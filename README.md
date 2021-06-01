@@ -228,3 +228,172 @@ http://localhost:8081/orders/v1/get/restaurants/1001
        "restaurantId":300001,
        "customerId":987654
     }
+
+# Driver Service
+## Create Driver
+  ## Request URL http://localhost:9095/drivers/v1/create
+  ## Request Body
+    {
+        "id":1002,
+        "name": "Madhu",
+        "email": "madhu@gmail.com",
+        "mobileNumber": "8888888888",
+        "adress":{
+            "id": 1,
+            "type": "DRIVER",
+            "street": "Marathahalli",
+            "city": "Bangalore",
+            "state": "Karnataka",
+            "pincode":"123456",
+            "lat": "17.123456",
+            "lon": "11.32145"
+        },
+        "currentLocation":{
+            "lat": "17.123456",
+            "lon": "11.32145",
+            "status": "FREE"
+        }
+    }
+  ## Response
+    {
+        "id": 1002,
+        "name": "Madhu",
+        "email": "madhu@gmail.com",
+        "mobileNumber": "8888888888",
+        "adress": {
+            "id": 1,
+            "type": "DRIVER",
+            "street": "Marathahalli",
+            "city": "Bangalore",
+            "state": "Karnataka",
+            "pincode": "123456",
+            "lat": "17.123456",
+            "lon": "11.32145"
+        },
+        "currentLocation": {
+            "lat": 17.123456,
+            "lon": 11.32145,
+            "status": "FREE"
+        }
+    }
+    
+   ## Get Driver Details Based on Mobile Number
+   ## Request URL http://localhost:9095/drivers/v1/get/8888888888
+   ## Response
+        {
+            "id": 1002,
+            "name": "Madhu",
+            "email": "madhu@gmail.com",
+            "mobileNumber": "8888888888",
+            "adress": {
+                "id": 1,
+                "type": "DRIVER",
+                "street": "Marathahalli",
+                "city": "Bangalore",
+                "state": "Karnataka",
+                "pincode": "123456",
+                "lat": "17.123456",
+                "lon": "11.32145"
+            },
+            "currentLocation": {
+                "lat": 17.123456,
+                "lon": 11.32145,
+                "status": "FREE"
+            }
+        }
+        
+ ## Get Available Drivers Based on DriverStatus== FREE
+ ## Request URL http://localhost:9095/drivers/v1/getavaiabledrivers
+ ## Response
+        [
+        {
+            "id": 1001,
+            "name": "Harish",
+            "email": "harish@hcl.com",
+            "mobileNumber": "9999999999",
+            "adress": {
+                "id": 1,
+                "type": "DRIVER",
+                "street": "Marathahalli",
+                "city": "Bangalore",
+                "state": "Karnataka",
+                "pincode": "123456",
+                "lat": null,
+                "lon": null
+            },
+            "currentLocation": {
+                "lat": 17.123456,
+                "lon": 11.32145,
+                "status": "FREE"
+            }
+        },
+        {
+            "id": 1002,
+            "name": "Madhu",
+            "email": "madhu@gmail.com",
+            "mobileNumber": "8888888888",
+            "adress": {
+                "id": 1,
+                "type": "DRIVER",
+                "street": "Marathahalli",
+                "city": "Bangalore",
+                "state": "Karnataka",
+                "pincode": "123456",
+                "lat": "17.123456",
+                "lon": "11.32145"
+            },
+            "currentLocation": {
+                "lat": 17.123456,
+                "lon": 11.32145,
+                "status": "FREE"
+            }
+        }
+    ] 
+    
+ ## Get the Drivers Near to Restaurant 
+ ## Request URL http://localhost:9095/drivers/v1/getavaiabledrivers?lat=10.123456&lon=11.32145&dis=7
+ ## Response
+    [
+    {
+        "id": 1001,
+        "name": "Harish",
+        "email": "harish@hcl.com",
+        "mobileNumber": "9999999999",
+        "adress": {
+            "id": 1,
+            "type": "DRIVER",
+            "street": "Marathahalli",
+            "city": "Bangalore",
+            "state": "Karnataka",
+            "pincode": "123456",
+            "lat": null,
+            "lon": null
+        },
+        "currentLocation": {
+            "lat": 17.123456,
+            "lon": 11.32145,
+            "status": "FREE"
+        }
+    },
+    {
+        "id": 1002,
+        "name": "Madhu",
+        "email": "madhu@gmail.com",
+        "mobileNumber": "8888888888",
+        "adress": {
+            "id": 1,
+            "type": "DRIVER",
+            "street": "Marathahalli",
+            "city": "Bangalore",
+            "state": "Karnataka",
+            "pincode": "123456",
+            "lat": "17.123456",
+            "lon": "11.32145"
+        },
+        "currentLocation": {
+            "lat": 17.123456,
+            "lon": 11.32145,
+            "status": "FREE"
+        }
+    }
+]
