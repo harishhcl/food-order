@@ -1,1 +1,9 @@
+server:
+  port: 9096
 
+spring:
+  application:
+    name: customer-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/food_order
