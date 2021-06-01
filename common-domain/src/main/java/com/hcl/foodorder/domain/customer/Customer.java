@@ -13,6 +13,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * 
+ * @author Harishkumar Reddy
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,4 +31,5 @@ public class Customer {
 	private String email;
 	private String mobileNumber;
 	private Address adress;
+	private Boolean isActive;
 }

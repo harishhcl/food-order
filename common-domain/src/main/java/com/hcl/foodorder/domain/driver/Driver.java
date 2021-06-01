@@ -13,6 +13,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * 
+ * @author Harishkumar Reddy
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,4 +32,5 @@ public class Driver {
 	private String mobileNumber;
 	private Address adress;
 	private CurrentLocation currentLocation;
+	private Boolean isActive;
 }

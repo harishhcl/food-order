@@ -1,11 +1,14 @@
 package com.hcl.foodorder.domain.exception;
 
-
-
 import java.util.Date;
 
 import lombok.Data;
 
+/**
+ * 
+ * @author Harishkumar Reddy
+ *
+ */
 @Data
 public class ErrorDetails {
 	private Date timestamp;

@@ -12,7 +12,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
+/**
+ * 
+ * @author Harishkumar Reddy
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,4 +30,7 @@ public class Restaurant {
 	private String description;
 	private String mobileNumber;
 	private Address address;
+	private Boolean isActive;
+	private Boolean isOpen;
+	
 }

@@ -10,7 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.hcl.foodorder.domain.restaurant.MenuItem;
 
 import lombok.Data;
-
+/**
+ * 
+ * @author Harishkumar Reddy
+ *
+ */
 @Data
 @Document
 public class Order {
