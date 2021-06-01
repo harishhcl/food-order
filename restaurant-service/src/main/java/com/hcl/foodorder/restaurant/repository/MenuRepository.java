@@ -7,7 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import com.hcl.foodorder.domain.restaurant.MenuItem;
 
+/**
+ * 
+ * @author Harishkumar Reddy
+ *
+ */
 @Repository
-public interface MenuRepository extends MongoRepository<MenuItem, Long>{
+public interface MenuRepository extends MongoRepository<MenuItem, Long> {
 	List<MenuItem> findByRestaurantId(Long restaurantId);
 }

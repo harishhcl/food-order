@@ -19,6 +19,11 @@ import com.hcl.foodorder.domain.restaurant.Restaurant;
 import com.hcl.foodorder.restaurant.service.MenuService;
 import com.hcl.foodorder.restaurant.service.RestaurantService;
 
+/**
+ * 
+ * @author Harishkumar Reddy
+ *
+ */
 @RestController
 @RequestMapping("restaurants/v1")
 public class RestaurantController {
@@ -56,8 +61,7 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/get/{restaurantId}/menu")
-	public ResponseEntity<List<MenuItem>> getMenuDetails(@PathVariable("restaurantId") Long restaurantId)
-			throws RestaurantDetailsNotFoundException {
+	public ResponseEntity<List<MenuItem>> getMenuDetails(@PathVariable("restaurantId") Long restaurantId) {
 		List<MenuItem> menuList = menuMervice.getMenu(restaurantId);
 		return new ResponseEntity<>(menuList, HttpStatus.OK);
 	}

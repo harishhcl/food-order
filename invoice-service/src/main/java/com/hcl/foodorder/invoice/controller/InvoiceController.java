@@ -2,6 +2,8 @@ package com.hcl.foodorder.invoice.controller;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import com.itextpdf.text.DocumentException;
 @RestController
 @RequestMapping("invoices/v1")
 public class InvoiceController {
+	private static final Logger logger = LoggerFactory.getLogger(InvoiceController.class);
 	@Autowired
 	private PDFGenerator generator;
 
@@ -26,7 +29,8 @@ public class InvoiceController {
 			generator.generatePDFReport(order);
 		} catch (DocumentException | IOException e) {
 			e.printStackTrace();
-		}		
+		}	
+		logger.info("Report has been generated for {} ",order.getOrderNumber());
 		return new ResponseEntity<>("Report has been generated ",HttpStatus.OK);
 	}
 }

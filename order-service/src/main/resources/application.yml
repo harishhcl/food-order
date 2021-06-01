@@ -3,5 +3,5 @@ server:
 
 spring:
   application:
-    name: gateway-service  data:    mongodb:
+    name: order-service  data:    mongodb:
       uri: mongodb://localhost:27017/food_order

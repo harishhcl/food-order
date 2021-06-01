@@ -11,19 +11,39 @@ import com.hcl.foodorder.domain.exception.DuplicateOrderCreationException;
 import com.hcl.foodorder.domain.exception.ErrorDetails;
 import com.hcl.foodorder.domain.exception.OrderDetailsNotFoundException;
 
+/**
+ * 
+ * @author Harishkumar Reddy
+ *
+ */
 @RestControllerAdvice
 public class OrderControllerAdvice {
+	/**
+	 * If the Requested Order Details not available based on order number will throw
+	 * OrderDetailsNotFoundException
+	 * 
+	 * @param exception
+	 * @return
+	 */
 	@ExceptionHandler(OrderDetailsNotFoundException.class)
 	public ResponseEntity<ErrorDetails> orderDetailsNotFoundException(OrderDetailsNotFoundException exception) {
 		ErrorDetails error = new ErrorDetails(new Date(), exception.getMessage(), HttpStatus.EXPECTATION_FAILED.name());
-		return new ResponseEntity<>(error, HttpStatus.EXPECTATION_FAILED) ;
-		
+		return new ResponseEntity<>(error, HttpStatus.EXPECTATION_FAILED);
+
 	}
+
+	/**
+	 * If we try to create the duplicate order in the system by orderNumber will
+	 * throw DuplicateOrderCreationException
+	 * 
+	 * @param exception
+	 * @return
+	 */
 	@ExceptionHandler(DuplicateOrderCreationException.class)
 	public ResponseEntity<ErrorDetails> duplicateOrderCreationException(DuplicateOrderCreationException exception) {
 		ErrorDetails error = new ErrorDetails(new Date(), exception.getMessage(), HttpStatus.BAD_REQUEST.name());
-		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST) ;
-		
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+
 	}
-	
+
 }

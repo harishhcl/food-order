@@ -98,7 +98,7 @@ public class DriverService {
 					Double inputLon = Double.parseDouble(lon);
 					Double result = calculateDistanceUtil.distance(inputLat,inputLon, driverLat, driverLon);
 					BigDecimal distance=new BigDecimal(result).setScale(2,RoundingMode.HALF_DOWN);
-					logger.info("Calculated Distance {} ",distance);
+					logger.info("Calculated Distance : {} for Driver Name : {} ",distance,driver.getName());
 					return (DriverStatus.FREE.name()).equals(driver.getCurrentLocation().getStatus().name()) && distance.doubleValue() <=Double.parseDouble(inputDistance);
 				}
 				return false;

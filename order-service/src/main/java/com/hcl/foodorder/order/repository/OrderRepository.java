@@ -8,13 +8,22 @@ import org.springframework.stereotype.Repository;
 
 import com.hcl.foodorder.domain.order.Order;
 
+/**
+ * 
+ * @author Harishkumar Reddy
+ *
+ */
 @Repository
 public interface OrderRepository extends MongoRepository<Order, Long> {
-	
+
 	Optional<Order> findById(Long id);
+
 	List<Order> findByOrderNumber(Long orderNumber);
+
 	List<Order> findByRestaurantId(Long restaurantId);
+
 	List<Order> findByCustomerId(Long customerId);
+
 	List<Order> findByDriverId(Long driverId);
-	
+
 }

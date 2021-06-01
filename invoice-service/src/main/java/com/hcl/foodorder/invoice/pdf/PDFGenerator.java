@@ -2,17 +2,14 @@ package com.hcl.foodorder.invoice.pdf;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.hcl.foodorder.domain.order.Order;
-import com.hcl.foodorder.domain.order.OrderStatus;
 import com.hcl.foodorder.domain.restaurant.MenuItem;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -24,14 +21,29 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+/**
+ * 
+ * @author Harishkumar Reddy
+ *
+ */
 @Service
 public class PDFGenerator {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(PDFGenerator.class);
+	private static final Logger logger = LoggerFactory.getLogger(PDFGenerator.class);
 
+	@Value("${fileBaseLocation}")
+	private String fileBaseLocation;
+
+	/**
+	 * Generate the Order PDF Invoice file and save it in the specified location.
+	 * 
+	 * @param order
+	 * @throws DocumentException
+	 * @throws IOException
+	 */
 	public void generatePDFReport(Order order) throws DocumentException, IOException {
 		Document document = new Document();
-		PdfWriter.getInstance(document, new FileOutputStream("D:/HCL/invoiceReport_" + order.getOrderNumber() + ".pdf"));
+		PdfWriter.getInstance(document, new FileOutputStream(fileBaseLocation + order.getOrderNumber() + ".pdf"));
 		document.open();
 
 		// Invoice Header
@@ -88,44 +100,6 @@ public class PDFGenerator {
 		document.add(paragraph);
 
 		document.close();
+		logger.info("Report has been generated ");
 	}
-/*
-	public static void main(String[] args) throws DocumentException, URISyntaxException, IOException {
-
-		PDFGenerator pdfGenerator = new PDFGenerator();
-		Order order = new Order();
-		Set<MenuItem> items = new HashSet<>();
-
-		MenuItem item1 = new MenuItem();
-		item1.setName("Biryani");
-		item1.setDescription("Veg Biryani");
-		item1.setId(1L);
-		item1.setRestaurantId(1234567890L);
-		item1.setPrice(100.00);
-		item1.setQuantity(1);
-
-		MenuItem item2 = new MenuItem();
-		item2.setName("Biryani");
-		item2.setDescription("Non Veg Biryani");
-		item2.setId(2L);
-		item2.setRestaurantId(1234567890L);
-		item2.setPrice(200.00);
-		item2.setQuantity(1);
-
-		items.add(item1);
-		items.add(item2);
-
-		order.setId(1234567890L);
-		order.setOrderNumber(1234567890L);
-		order.setStatus(OrderStatus.CREATED);
-		order.setTaxPercentage(5.0);
-		order.setItemList(items);
-		order.setCustomerId(987654L);
-		order.setRestaurantId(20001L);
-		pdfGenerator.generatePDFReport(order);
-
-		LOGGER.info("PDF Generation..!");
-
-	}
-*/
 }
