@@ -1,3 +1,12 @@
+
+## Swagger API's Documentation
+
+    Restaurant  -    http://localhost:8082/swagger-ui.html 
+    Order       -    http://localhost:8085/swagger-ui.html 
+    Invoice     -    http://localhost:8086/swagger-ui.html 
+    Customer    -    http://localhost:9096/swagger-ui.html 
+    Driver      -    http://localhost:9095/swagger-ui.html 
+
 ## food-order
 
 ## Create Restaurant 
@@ -398,9 +407,3 @@ http://localhost:8080/orders/v1/get/restaurants/1001
     }
 ]
 
-## Swagger API's
-    Restaurant  -    http://localhost:8082/swagger-ui.html 
-    Order       -    http://localhost:8085/swagger-ui.html 
-    Invoice     -    http://localhost:8086/swagger-ui.html 
-    Customer    -    http://localhost:9096/swagger-ui.html 
-    Driver      -    http://localhost:9095/swagger-ui.html 
