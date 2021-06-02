@@ -8,9 +8,9 @@
     Driver      -    http://localhost:9095/swagger-ui.html 
 
 # Customer Service
-## Create 
+### Create 
     http://localhost:9096/customers/v1/create
-# Request
+### Request
     {
       "id": 90001,
       "name": "Harish",
@@ -28,7 +28,7 @@
       },
       "isActive": true
     }
-# Response
+### Response
     {
       "id": 90001,
       "name": "Harish",
@@ -46,9 +46,9 @@
       },
       "isActive": true
     }
-## Get Customer Details by Mobile number
+### Get Customer Details by Mobile number
     http://localhost:9096/customers/v1/get/9090909090
-# Response
+### Response
     {
       "id": 90001,
       "name": "Harish",
@@ -66,9 +66,9 @@
       },
       "isActive": true
     }
- ## Update Customer Details
+ ### Update Customer Details
     http://localhost:9096/customers/v1/update/9090909090
- # Request
+ ### Request
      {
       "id": 90001,
       "name": "Harish",
@@ -86,7 +86,7 @@
       },
       "isActive": true
     }
- # Response 
+ ### Response 
     {
       "id": 90001,
       "name": "Harish",
