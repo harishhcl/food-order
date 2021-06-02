@@ -7,6 +7,104 @@
     Customer    -    http://localhost:9096/swagger-ui.html 
     Driver      -    http://localhost:9095/swagger-ui.html 
 
+# Customer Service
+## Create 
+    http://localhost:9096/customers/v1/create
+# Request
+    {
+      "id": 90001,
+      "name": "Harish",
+      "email": "harish@hcl.com",
+      "mobileNumber": "9090909090",
+      "adress": {
+        "id": 9001,
+        "type": "CUSTOMER",
+        "street": "BTM Layout 1st Stage",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560029",
+        "lat": "12.91400",
+        "lon": "77.62470"
+      },
+      "isActive": true
+    }
+# Response
+    {
+      "id": 90001,
+      "name": "Harish",
+      "email": "harish@hcl.com",
+      "mobileNumber": "9090909090",
+      "adress": {
+        "id": 9001,
+        "type": "CUSTOMER",
+        "street": "BTM Layout 1st Stage",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560029",
+        "lat": "12.91400",
+        "lon": "77.62470"
+      },
+      "isActive": true
+    }
+## Get Customer Details by Mobile number
+    http://localhost:9096/customers/v1/get/9090909090
+# Response
+    {
+      "id": 90001,
+      "name": "Harish",
+      "email": "harish@hcl.com",
+      "mobileNumber": "9090909090",
+      "adress": {
+        "id": 9001,
+        "type": "CUSTOMER",
+        "street": "BTM Layout 1st Stage",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560029",
+        "lat": "12.91401",
+        "lon": "77.62470"
+      },
+      "isActive": true
+    }
+ ## Update Customer Details
+    http://localhost:9096/customers/v1/update/9090909090
+ # Request
+     {
+      "id": 90001,
+      "name": "Harish",
+      "email": "harish@hcl.com",
+      "mobileNumber": "9090909090",
+      "adress": {
+        "id": 9001,
+        "type": "CUSTOMER",
+        "street": "BTM Layout 1st Stage",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560029",
+        "lat": "12.91401",
+        "lon": "77.62470"
+      },
+      "isActive": true
+    }
+ # Response 
+    {
+      "id": 90001,
+      "name": "Harish",
+      "email": "harish@hcl.com",
+      "mobileNumber": "9090909090",
+      "adress": {
+        "id": 9001,
+        "type": "CUSTOMER",
+        "street": "BTM Layout 1st Stage",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560029",
+        "lat": "12.91401",
+        "lon": "77.62470"
+      },
+      "isActive": true
+    }
+############################################################################################
 ## food-order
 
 ## Create Restaurant 
