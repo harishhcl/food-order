@@ -81,30 +81,47 @@ public class DriverService {
 	}
 
 	/**
-	 * Get the List of Drivers whose status is FREE and Distance between the driver current position and restaurant is less than equal to input distance KM.
+	 * Get the List of Drivers whose status is FREE and Distance between the driver
+	 * current position and restaurant is less than equal to input distance KM.
+	 * 
 	 * @param lat
 	 * @param lon
 	 * @param inputDistance
 	 * @return
 	 */
-	public List<Driver> getAllFreeDrivers(String lat, String lon,String inputDistance) {
+	public List<Driver> getAllFreeDrivers(String lat, String lon, String inputDistance) {
 		List<Driver> allDrivers = driverRepository.findAll();
 		return allDrivers.stream().filter(driver -> {
-				if(Objects.nonNull(driver.getCurrentLocation())) {
-					Double driverLat = driver.getCurrentLocation().getLat();
-					Double driverLon = driver.getCurrentLocation().getLon();
-					
-					Double inputLat = Double.parseDouble(lat);
-					Double inputLon = Double.parseDouble(lon);
-					Double result = calculateDistanceUtil.distance(inputLat,inputLon, driverLat, driverLon);
-					BigDecimal distance=new BigDecimal(result).setScale(2,RoundingMode.HALF_DOWN);
-					logger.info("Calculated Distance : {} for Driver Name : {} ",distance,driver.getName());
-					return (DriverStatus.FREE.name()).equals(driver.getCurrentLocation().getStatus().name()) && distance.doubleValue() <=Double.parseDouble(inputDistance);
-				}
-				return false;
-			}).collect(Collectors.toList());
-		
-		
+			if (Objects.nonNull(driver.getCurrentLocation())) {
+				Double driverLat = driver.getCurrentLocation().getLat();
+				Double driverLon = driver.getCurrentLocation().getLon();
+
+				Double inputLat = Double.parseDouble(lat);
+				Double inputLon = Double.parseDouble(lon);
+				Double result = calculateDistanceUtil.distance(inputLat, inputLon, driverLat, driverLon);
+				BigDecimal distance = new BigDecimal(result).setScale(2, RoundingMode.HALF_DOWN);
+				logger.info("Calculated Distance : {} for Driver Name : {} ", distance, driver.getName());
+				return (DriverStatus.FREE.name()).equals(driver.getCurrentLocation().getStatus().name())
+						&& distance.doubleValue() <= Double.parseDouble(inputDistance);
+			}
+			return false;
+		}).collect(Collectors.toList());
+
+	}
+
+	/**
+	 * Update the driver details
+	 * 
+	 * @param driver
+	 * @return
+	 * @throws DriverDetailsNotFoundException
+	 */
+	public Driver updateDriverDetails(Driver driver) throws DriverDetailsNotFoundException {
+		Driver response = driverRepository.findByMobileNumber(driver.getMobileNumber());
+		if (Objects.isNull(response))
+			throw new DriverDetailsNotFoundException("No Driver Details Found for " + driver.getMobileNumber());
+		logger.info("updating driver details {} ", driver.getMobileNumber());
+		return driverRepository.save(driver);
 	}
 
 }

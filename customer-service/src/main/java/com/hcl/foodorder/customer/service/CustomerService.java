@@ -1,10 +1,8 @@
-/**
- * 
- */
 package com.hcl.foodorder.customer.service;
 
 import java.util.Objects;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hcl.foodorder.customer.repository.CustomerRepository;
@@ -18,6 +16,7 @@ import com.hcl.foodorder.domain.exception.DuplicateCustomerCreationException;
  */
 @Service
 public class CustomerService {
+	@Autowired
 	private CustomerRepository customerRepository;
 
 	/**
@@ -44,6 +43,19 @@ public class CustomerService {
 			throw new CustomerDetailsNotFoundException("Customer Details Not Fund");
 		}
 		return result;
+	}
+
+	/**
+	 * 
+	 * @param customer
+	 * @return
+	 * @throws CustomerDetailsNotFoundException
+	 */
+	public Customer updateCustomerDetails(Customer customer) throws CustomerDetailsNotFoundException {
+		Customer existingCustomer = getCustomerDetails(customer.getMobileNumber());
+		if (Objects.nonNull(existingCustomer))
+			return customerRepository.save(customer);
+		return null;
 	}
 
 }

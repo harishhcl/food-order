@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,8 +31,14 @@ public class CustomerController {
 		return new ResponseEntity<>(customerService.create(customer), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/get/{customerId}")
-	public ResponseEntity<Customer> create(@PathVariable("customerId") String customerId) throws CustomerDetailsNotFoundException {
-		return new ResponseEntity<>(customerService.getCustomerDetails(customerId), HttpStatus.OK);
+	@GetMapping("/get/{customerMobileNumber}")
+	public ResponseEntity<Customer> create(@PathVariable("customerMobileNumber") String customerMobileNumber) throws CustomerDetailsNotFoundException {
+		return new ResponseEntity<>(customerService.getCustomerDetails(customerMobileNumber), HttpStatus.OK);
+	}
+
+	@PutMapping("/update/{customerMobileNumber}")
+	public ResponseEntity<Customer> update(@RequestBody Customer customer, @PathVariable("customerMobileNumber") String customerMobileNumber) throws CustomerDetailsNotFoundException {
+		customer.setMobileNumber(customerMobileNumber);
+		return new ResponseEntity<>(customerService.updateCustomerDetails(customer), HttpStatus.OK);
 	}
 }

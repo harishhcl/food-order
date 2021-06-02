@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.hcl.foodorder.domain.restaurant.MenuItem;
 
 import lombok.Data;
+
 /**
  * 
  * @author Harishkumar Reddy
@@ -32,5 +33,4 @@ public class Order {
 	private Long restaurantId;
 	private Long customerId;
 	private Long driverId;
-
 }

@@ -2,7 +2,6 @@ package com.hcl.foodorder.driver.controller;
 
 import java.util.List;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,5 +58,13 @@ public class DriverController {
 		}
 		return new ResponseEntity<>(driverService.getAllFreeDrivers(lat,lon,dis), HttpStatus.OK);
 		
+	}
+	
+	@PutMapping("/update/{mobileNumber}")
+	public ResponseEntity<Driver> getDriver(@RequestBody Driver driver,@PathVariable("mobileNumber") String mobileNumber)
+			throws DriverDetailsNotFoundException {
+		logger.info("invoked update api");
+		driver.setMobileNumber(mobileNumber);
+		return new ResponseEntity<>(driverService.updateDriverDetails(driver), HttpStatus.OK);
 	}
 }

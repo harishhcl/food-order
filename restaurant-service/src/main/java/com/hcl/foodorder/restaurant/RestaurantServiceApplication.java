@@ -5,6 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+
 /**
  * 
  * @author Harishkumar Reddy
@@ -13,6 +16,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 //@EnableEurekaClient
 @EnableMongoRepositories
+@OpenAPIDefinition(info = @Info(title = "Restaurant API", version = "2.0", description = "Restaurants Information"))
 public class RestaurantServiceApplication {
 
 	public static void main(String[] args) {
