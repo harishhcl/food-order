@@ -14,6 +14,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>invoice-service</name>
 	<description>Springboot Project</description>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>2020.0.2</spring-cloud.version>
