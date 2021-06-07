@@ -1,0 +1,41 @@
+
+## Local Elasticsearch config
+###spring.data.elasticsearch.cluster-nodes=localhost:9300
+#spring.data.elasticsearch.cluster-name=elasticsearch
+#
+#elasticsearch.index.name=items_index
+#elasticsearch.items.type=items
+#
+## App config
+#server.port=8102
+#spring.application.name=BootElastic
+elasticsearch:
+  items:
+    type: items
+  index:
+    name: items_index
+spring:
+  application:
+    name: search-service
+  cloud:
+    stream:
+      default-binder: kafka
+      kafka:
+        binder:
+          brokers:
+          - localhost:9092
+      bindings:
+        menu-item-output:
+         binder: kafka
+         destination: item-details-topic
+         content-type: application/json
+         group: item-group
+  data:
+    elasticsearch:
+      
+    #  cluster-nodes: 
+      #cluster-name: 3efc4a911e7148928c9e3db090
+      repositories:
+        enabled: true
+server:
+  port: 8083     

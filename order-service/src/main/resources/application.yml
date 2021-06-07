@@ -4,4 +4,5 @@ server:
 spring:
   application:
     name: order-service  data:    mongodb:
-      uri: mongodb://localhost:27017/food_order
+      #uri: mongodb://localhost:27017/food_order
+      uri: mongodb+srv://fosuser:fospassword@fos-cluster-0.ycnnt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
