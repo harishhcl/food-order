@@ -20,3 +20,7 @@ spring:
          destination: item-details-topic
          content-type: application/json
          group: item-group
+eureka: 
+   client: 
+      serviceUrl: 
+         defaultZone: http://7fb6b1eda5c4445eaf6a.eastus.aksapp.io/eureka         
