@@ -14,7 +14,7 @@ public class MenuItemStreamListener {
 
 	@Autowired
 	private MenuItemsService menuItemsService;
-
+	
 	@StreamListener(MenuItemStream.INPUT)
 	public void receiveEmployeeMessage(@Payloads MenuItemEvent menuItemEvent) {
 		com.hcl.foodorder.domain.restaurant.MenuItem payloadMenuItem = menuItemEvent.getPayload();

@@ -9,7 +9,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.hcl.foodorder.domain.restaurant.MenuItem;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * 
@@ -17,6 +20,9 @@ import lombok.Data;
  *
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Document
 public class Order {
 	@Id
