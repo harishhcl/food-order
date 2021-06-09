@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.hcl.foodorder.domain.restaurant.MenuItem;
@@ -14,11 +13,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-/**
- * 
- * @author Harishkumar Reddy
- *
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +21,6 @@ import lombok.ToString;
 public class Order {
 	@Id
 	private Long id;
-	@Indexed(unique = true)
 	private Long orderNumber;
 	private Date createdDate;
 	private Date lastUpdatedDate;

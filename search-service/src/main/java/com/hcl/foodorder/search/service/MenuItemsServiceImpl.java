@@ -1,5 +1,8 @@
 package com.hcl.foodorder.search.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -47,32 +50,31 @@ public class MenuItemsServiceImpl implements MenuItemsService{
     }
 
 
-    public SearchHits<MenuItem> searchMultiField(String name, int qty) {
+    public List<MenuItem> searchMultiField(String name, int qty) {
         QueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.matchQuery("name", name))
                 .must(QueryBuilders.matchQuery("quantity", qty));
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(query).build();
         SearchHits<MenuItem> items = elasticsearchOperations.search(nativeSearchQuery, MenuItem.class, IndexCoordinates.of(indexName));
-        return items;
+        return items.stream().map(s -> s.getContent()).collect(Collectors.toList());
     }
 
-    public SearchHits<MenuItem> getMenuNameSearchData(String name) {
+    public List<MenuItem> getMenuNameSearchData(String name) {
         String search = ".*" + name + ".*";
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder()
                 .withFilter(QueryBuilders.regexpQuery("name", search)).build();
         SearchHits<MenuItem> items = elasticsearchOperations.search(nativeSearchQuery, MenuItem.class, IndexCoordinates.of(indexName));
-        return items;
-
+        return items.stream().map(s -> s.getContent()).collect(Collectors.toList());
     }
 
-    public SearchHits<MenuItem> multiMatchQuery(Long id) {
+    public List<MenuItem> multiMatchQuery(Long id) {
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.multiMatchQuery(id)
                 .field("restaurantId").field("id").type(MultiMatchQueryBuilder.Type.BEST_FIELDS)).build();
         SearchHits<MenuItem> items = elasticsearchOperations.search(nativeSearchQuery, MenuItem.class, IndexCoordinates.of(indexName));
-        return items;
+        return items.stream().map(s -> s.getContent()).collect(Collectors.toList());
     }
 
 
-    public SearchHits<MenuItem> getMenuItemsByPriceRange(final Double itemPriceMin, final Double itemPriceMax) {
+    public List<MenuItem> getMenuItemsByPriceRange(final Double itemPriceMin, final Double itemPriceMax) {
         Criteria criteria = new Criteria("price")
                 .greaterThan(itemPriceMin)
                 .lessThan(itemPriceMax);
@@ -80,16 +82,16 @@ public class MenuItemsServiceImpl implements MenuItemsService{
         Query searchQuery = new CriteriaQuery(criteria);
 
         SearchHits<MenuItem> items = elasticsearchOperations.search(searchQuery, MenuItem.class, IndexCoordinates.of(indexName));
-        return items;
+        return items.stream().map(s -> s.getContent()).collect(Collectors.toList());
     }
 
 
-    public SearchHits<MenuItem> getMenuItemsByDescriptions(final String description) {
+    public List<MenuItem> getMenuItemsByDescriptions(final String description) {
         Query searchQuery = new StringQuery(
                 "{\"match\":{\"description\":{\"query\":\""+ description + "\"}}}\"");
 
         SearchHits<MenuItem> items = elasticsearchOperations.search(searchQuery, MenuItem.class, IndexCoordinates.of(indexName));
-        return items;
+        return items.stream().map(s -> s.getContent()).collect(Collectors.toList());
     }
 
 }

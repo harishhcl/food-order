@@ -42,31 +42,30 @@ public class MenuService {
 	 * @param menuItems
 	 * @param restaurantId
 	 * @return
+	 * @throws RestaurantDetailsNotFoundException
 	 */
-	public List<MenuItem> createMenu(List<MenuItem> menuItems, Long restaurantId) {
-		try {
-			Restaurant restaurantDetails = restaurantService.getRestaurant(restaurantId);
-			if (restaurantDetails != null) {
-				List<MenuItem> data = menuItems.stream().map(item -> {
-					item.setRestaurantId(restaurantId);
-					return item;
-				}).collect(Collectors.toList());
+	public List<MenuItem> createMenu(List<MenuItem> menuItems, Long restaurantId)
+			throws RestaurantDetailsNotFoundException {
+		logger.info("Invoking createMenu method.");
+		Restaurant restaurantDetails = restaurantService.getRestaurant(restaurantId);
+		if (restaurantDetails != null) {
+			List<MenuItem> data = menuItems.stream().map(item -> {
+				item.setRestaurantId(restaurantId);
+				return item;
+			}).collect(Collectors.toList());
 
-				List<MenuItem> response = menuRepository.saveAll(data);
-				logger.info("Generating Menu Item Event and Sending to kafka topic..!");
-				response.forEach(item -> {
-					MenuItemEvent event = new MenuItemEvent();
-					event.setEventId(String.valueOf(UUID.randomUUID()));
-					event.setCreatedDate(new Date());
-					event.setUpdatedDate(new Date());
-					event.setPayload(item);
-					event.setStatus(EventStatus.CREATED);
-					sendMenuItemDetails.sendMessage(event);
-				});
-				return response;
-			}
-		} catch (RestaurantDetailsNotFoundException e) {
-			e.printStackTrace();
+			List<MenuItem> response = menuRepository.saveAll(data);
+			logger.info("Generating Menu Item Event and Sending to kafka topic..!");
+			response.forEach(item -> {
+				MenuItemEvent event = new MenuItemEvent();
+				event.setEventId(String.valueOf(UUID.randomUUID()));
+				event.setCreatedDate(new Date());
+				event.setUpdatedDate(new Date());
+				event.setPayload(item);
+				event.setStatus(EventStatus.CREATED);
+				sendMenuItemDetails.sendMessage(event);
+			});
+			return response;
 		}
 		return Collections.emptyList();
 	}

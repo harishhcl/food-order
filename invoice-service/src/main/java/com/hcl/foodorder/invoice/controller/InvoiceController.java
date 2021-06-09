@@ -29,8 +29,8 @@ public class InvoiceController {
 			generator.generatePDFReport(order);
 		} catch (DocumentException | IOException e) {
 			e.printStackTrace();
-		}	
-		logger.info("Report has been generated for {} ",order.getOrderNumber());
-		return new ResponseEntity<>("Report has been generated ",HttpStatus.OK);
+		}
+		logger.info("Report has been generated for {} ", order.getOrderNumber());
+		return new ResponseEntity<>("Report has been generated ", HttpStatus.OK);
 	}
 }

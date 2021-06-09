@@ -8,11 +8,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
-/**
- * 
- * @author Harishkumar Reddy
- *
- */
+
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 @EnableMongoRepositories
 @EnableEurekaClient
