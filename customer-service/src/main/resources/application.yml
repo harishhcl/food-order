@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 8082
 
 spring:
   application:
@@ -12,4 +12,8 @@ spring:
 eureka: 
    client: 
       serviceUrl: 
-         defaultZone: http://7fb6b1eda5c4445eaf6a.eastus.aksapp.io/eureka
+         #defaultZone: http://7fb6b1eda5c4445eaf6a.eastus.aksapp.io/eureka 
+         defaultZone: http://localhost:8081/eureka
+management:
+   security:
+      enabled: false         
