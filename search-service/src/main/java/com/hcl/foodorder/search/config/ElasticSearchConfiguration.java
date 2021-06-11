@@ -10,6 +10,7 @@ import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration;
@@ -20,6 +21,15 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 @Configuration
 @EnableElasticsearchRepositories(basePackages = {"com.hcl.searchservice.repository"})
 public class ElasticSearchConfiguration extends AbstractElasticsearchConfiguration {
+
+    @Value("${elasticsearch.host}")
+    private String host;
+    @Value("${elasticsearch.userName}")
+    private String userName;
+    @Value("${elasticsearch.passWord}")
+    private String passWord;
+    @Value("${elasticsearch.port}")
+    private int port;
 
     @Override
     @Bean
@@ -35,9 +45,9 @@ public class ElasticSearchConfiguration extends AbstractElasticsearchConfigurati
 
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY,
-                new UsernamePasswordCredentials("elastic", "Qf32Hd231kQvAsdc9BDZDlyR"));
+                new UsernamePasswordCredentials(userName, passWord));
 
-        RestClientBuilder builder = RestClient.builder(new HttpHost("enterprise-search-deployment-e4a55d.es.westus2.azure.elastic-cloud.com", 9243,"https"))
+        RestClientBuilder builder = RestClient.builder(new HttpHost(host, port,"https"))
                 .setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
                     @Override
                     public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpClientBuilder) {
