@@ -22,48 +22,76 @@ import com.hcl.foodorder.domain.exception.DriverDetailsNotFoundException;
 import com.hcl.foodorder.domain.exception.DuplicateDriverCreationException;
 import com.hcl.foodorder.driver.service.DriverService;
 
-/**
- * controller class to accept the request from external system
- * 
- * @author hari
- *
- */
 @RestController
 @RequestMapping("/drivers/v1")
 public class DriverController {
 	private static final Logger logger = LoggerFactory.getLogger(DriverController.class);
+
 	@Autowired
 	private DriverService driverService;
 
+	/**
+	 * Create the new Driver
+	 * 
+	 * @param driver
+	 * @return
+	 * @throws DuplicateDriverCreationException
+	 */
 	@PostMapping("/create")
-	public ResponseEntity<Driver> create(@Validated @RequestBody Driver driver) throws DuplicateDriverCreationException {
-		logger.info("invoked create api");
+	public ResponseEntity<Driver> create(@Validated @RequestBody Driver driver)
+			throws DuplicateDriverCreationException {
+		logger.info("Invoking create driver api");
 		return new ResponseEntity<>(driverService.create(driver), HttpStatus.CREATED);
 	}
 
+	/**
+	 * Get the Driver Details by Driver Mobile Number.
+	 * 
+	 * @param mobileNumber
+	 * @return
+	 * @throws DriverDetailsNotFoundException
+	 */
 	@GetMapping("/get/{mobileNumber}")
 	public ResponseEntity<Driver> getDriver(@PathVariable("mobileNumber") String mobileNumber)
 			throws DriverDetailsNotFoundException {
-		logger.info("invoked get api");
+		logger.info("Invoking driver get api by mobile number {} ",mobileNumber);
 		return new ResponseEntity<>(driverService.getDriverDetails(mobileNumber), HttpStatus.OK);
 	}
 
+	/**
+	 * Get the Available based on the Latitude,Longitude and Distance from
+	 * Restaurant,Customer and Driver.
+	 * 
+	 * @param lat
+	 * @param lon
+	 * @param dis
+	 * @return
+	 */
 	@GetMapping("/getavaiabledrivers")
-	public ResponseEntity<List<Driver>> getAvaiableDrivers(@RequestParam(required = false) String lat, @RequestParam(required = false) String lon, @RequestParam(required = false) String dis) {
-		logger.info("invoked get all available drivers api");
-		//if(StringUtils.isBlank(lat) || StringUtils.isBlank(lon) || StringUtils.isBlank(dis)) {
-		if(lat==null || lon== null || dis == null) {
-			//get list of all available drivers
+	public ResponseEntity<List<Driver>> getAvaiableDrivers(@RequestParam(required = false) String lat,
+			@RequestParam(required = false) String lon, @RequestParam(required = false) String dis) {
+		logger.info("Invoking get all available drivers api.");
+		if (lat == null || lon == null || dis == null) {
+			logger.info("Feteching all the available drivers");
 			return new ResponseEntity<>(driverService.getAllFreeDrivers(), HttpStatus.OK);
 		}
-		return new ResponseEntity<>(driverService.getAllFreeDrivers(lat,lon,dis), HttpStatus.OK);
-		
+		logger.info("Feteching the available drivers based on provided lat {}, lon {} and distance {} ",lat,lon,dis);
+		return new ResponseEntity<>(driverService.getAllFreeDrivers(lat, lon, dis), HttpStatus.OK);
 	}
-	
+
+	/**
+	 * Update the Driver Details like Driver Current Status and Online Status by
+	 * Driver Mobile Number.
+	 * 
+	 * @param driver
+	 * @param mobileNumber
+	 * @return
+	 * @throws DriverDetailsNotFoundException
+	 */
 	@PutMapping("/update/{mobileNumber}")
-	public ResponseEntity<Driver> getDriver(@RequestBody Driver driver,@PathVariable("mobileNumber") String mobileNumber)
-			throws DriverDetailsNotFoundException {
-		logger.info("invoked update api");
+	public ResponseEntity<Driver> getDriver(@RequestBody Driver driver,
+			@PathVariable("mobileNumber") String mobileNumber) throws DriverDetailsNotFoundException {
+		logger.info("Invoking update api to update driver details {} ",mobileNumber);
 		driver.setMobileNumber(mobileNumber);
 		return new ResponseEntity<>(driverService.updateDriverDetails(driver), HttpStatus.OK);
 	}

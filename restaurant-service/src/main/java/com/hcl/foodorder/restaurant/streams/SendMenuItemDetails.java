@@ -10,7 +10,6 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.util.MimeTypeUtils;
 
 import com.hcl.foodorder.domain.events.MenuItemEvent;
-import com.hcl.foodorder.restaurant.service.MenuService;
 
 /**
  * @author Harishkumar Reddy

@@ -1,15 +1,15 @@
 package com.hcl.foodorder.search.service;
 
-import org.springframework.data.elasticsearch.core.SearchHits;
+import java.util.List;
 
 import com.hcl.foodorder.search.model.MenuItem;
 
 public interface MenuItemsService {
 
     String save(MenuItem menuItem);
-    SearchHits<MenuItem> searchMultiField(String name, int qty);
-    SearchHits<MenuItem> getMenuNameSearchData(String input);
-    SearchHits<MenuItem> multiMatchQuery(Long id);
-    SearchHits<MenuItem> getMenuItemsByPriceRange(final Double itemPriceMin, final Double itemPriceMax);
-    SearchHits<MenuItem> getMenuItemsByDescriptions(final String descriptions);
+    List<MenuItem> searchMultiField(String name, int qty);
+    List<MenuItem> getMenuNameSearchData(String input);
+    List<MenuItem> multiMatchQuery(Long id);
+    List<MenuItem> getMenuItemsByPriceRange(final Double itemPriceMin, final Double itemPriceMax);
+    List<MenuItem> getMenuItemsByDescriptions(final String descriptions);
 }

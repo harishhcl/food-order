@@ -2,6 +2,8 @@ package com.hcl.foodorder.customer.service;
 
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,16 +12,16 @@ import com.hcl.foodorder.domain.customer.Customer;
 import com.hcl.foodorder.domain.exception.CustomerDetailsNotFoundException;
 import com.hcl.foodorder.domain.exception.DuplicateCustomerCreationException;
 
-/**
- * @author Harishkumar Reddy
- *
- */
 @Service
 public class CustomerService {
+	private static final Logger logger = LoggerFactory.getLogger(CustomerService.class);
+
 	@Autowired
 	private CustomerRepository customerRepository;
 
 	/**
+	 * Implementing the Customer Create Business Logic.
+	 * 
 	 * @param customer
 	 * @return
 	 * @throws DuplicateCustomerCreationException
@@ -33,12 +35,15 @@ public class CustomerService {
 	}
 
 	/**
-	 * @param customerId
+	 * Get the Customer Details by Customer Mobile Number. If not found It will
+	 * throw the CustomerDetailsNotFoundException
+	 * 
+	 * @param mobileNumber
 	 * @return
 	 * @throws CustomerDetailsNotFoundException
 	 */
-	public Customer getCustomerDetails(String customerId) throws CustomerDetailsNotFoundException {
-		Customer result = customerRepository.findByMobileNumber(customerId);
+	public Customer getCustomerDetails(String mobileNumber) throws CustomerDetailsNotFoundException {
+		Customer result = customerRepository.findByMobileNumber(mobileNumber);
 		if (result == null) {
 			throw new CustomerDetailsNotFoundException("Customer Details Not Fund");
 		}
@@ -46,6 +51,7 @@ public class CustomerService {
 	}
 
 	/**
+	 * Update the customer by Customer Mobile Number.
 	 * 
 	 * @param customer
 	 * @return

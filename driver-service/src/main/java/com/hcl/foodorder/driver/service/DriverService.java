@@ -21,8 +21,6 @@ import com.hcl.foodorder.driver.util.CalculateDistanceUtil;
 /**
  * This Service class contains logic to perform all business operations. and
  * Send the details to Repository.
- * 
- * @author hari
  *
  */
 @Service
@@ -41,10 +39,13 @@ public class DriverService {
 	 * @throws DuplicateDriverCreationException
 	 */
 	public Driver create(Driver driver) throws DuplicateDriverCreationException {
+		logger.info("Invoking Driver create api");
 		try {
 			Driver existingDriver = getDriverDetails(driver.getMobileNumber());
-			if (Objects.nonNull(existingDriver))
+			if (Objects.nonNull(existingDriver)) {
+				logger.error("Duplicate driver creation for {} ", driver.getMobileNumber());
 				throw new DuplicateDriverCreationException("Driver already available for " + driver.getMobileNumber());
+			}
 		} catch (DriverDetailsNotFoundException e) {
 		}
 		logger.info("new driver created {} ", driver.getMobileNumber());
@@ -59,6 +60,7 @@ public class DriverService {
 	 * @throws DriverDetailsNotFoundException
 	 */
 	public Driver getDriverDetails(String mobileNumber) throws DriverDetailsNotFoundException {
+		logger.info("get the driver details for {} ",mobileNumber);
 		Driver response = driverRepository.findByMobileNumber(mobileNumber);
 		if (Objects.isNull(response))
 			throw new DriverDetailsNotFoundException("No Driver Details Found for " + mobileNumber);
@@ -72,6 +74,7 @@ public class DriverService {
 	 * @return
 	 */
 	public List<Driver> getAllFreeDrivers() {
+		logger.info("get all available free drives whose status is FREE");
 		List<Driver> allDrivers = driverRepository.findAll();
 		return allDrivers.stream().filter(driver -> {
 			if (Objects.nonNull(driver.getCurrentLocation()))
@@ -90,6 +93,7 @@ public class DriverService {
 	 * @return
 	 */
 	public List<Driver> getAllFreeDrivers(String lat, String lon, String inputDistance) {
+		logger.info("get all available free drives based on lat {} ,lon {} and distance {} ",lat,lon,inputDistance);
 		List<Driver> allDrivers = driverRepository.findAll();
 		return allDrivers.stream().filter(driver -> {
 			if (Objects.nonNull(driver.getCurrentLocation())) {
@@ -99,7 +103,7 @@ public class DriverService {
 				Double inputLat = Double.parseDouble(lat);
 				Double inputLon = Double.parseDouble(lon);
 				Double result = calculateDistanceUtil.distance(inputLat, inputLon, driverLat, driverLon);
-				BigDecimal distance = new BigDecimal(result).setScale(2, RoundingMode.HALF_DOWN);
+				BigDecimal distance = BigDecimal.valueOf(result).setScale(2, RoundingMode.HALF_DOWN);
 				logger.info("Calculated Distance : {} for Driver Name : {} ", distance, driver.getName());
 				return (DriverStatus.FREE.name()).equals(driver.getCurrentLocation().getStatus().name())
 						&& distance.doubleValue() <= Double.parseDouble(inputDistance);

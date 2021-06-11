@@ -2,6 +2,8 @@ package com.hcl.foodorder.order.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ import com.hcl.foodorder.order.service.OrderService;
 @RestController
 @RequestMapping("orders/v1")
 public class OrderController {
-
+	private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	@Autowired
 	private OrderService orderService;
 
@@ -38,6 +40,7 @@ public class OrderController {
 	 */
 	@PostMapping("/create")
 	public ResponseEntity<Order> create(@RequestBody Order order) throws DuplicateOrderCreationException {
+		logger.info("Invoking Order create api.");
 		Order orderDetails = orderService.create(order);
 		return new ResponseEntity<>(orderDetails, HttpStatus.CREATED);
 	}
@@ -52,6 +55,7 @@ public class OrderController {
 	@GetMapping("/get/restaurants/{restaurantId}")
 	public ResponseEntity<List<Order>> getRestaurantOrders(@PathVariable("restaurantId") Long restaurantId)
 			throws OrderDetailsNotFoundException {
+		logger.info("Get the restaurant orders by restaurantId {} ", restaurantId);
 		List<Order> orders = orderService.getOrdersByRestaurant(restaurantId);
 		return new ResponseEntity<>(orders, HttpStatus.OK);
 	}
@@ -66,6 +70,7 @@ public class OrderController {
 	@GetMapping("/get/customers/{customerId}")
 	public ResponseEntity<List<Order>> getCustomerOrders(@PathVariable("customerId") Long customerId)
 			throws OrderDetailsNotFoundException {
+		logger.info("Get the orders by customerId {} ", customerId);
 		List<Order> orders = orderService.getOrdersByCustomer(customerId);
 		return new ResponseEntity<>(orders, HttpStatus.OK);
 	}
@@ -80,6 +85,7 @@ public class OrderController {
 	@GetMapping("/get/orders/{orderNumber}")
 	public ResponseEntity<List<Order>> getOrders(@PathVariable("orderNumber") Long orderNumber)
 			throws OrderDetailsNotFoundException {
+		logger.info("Get the orders by orderNumber {} ", orderNumber);
 		List<Order> orders = orderService.getOrdersByOrderNumber(orderNumber);
 		return new ResponseEntity<>(orders, HttpStatus.OK);
 	}

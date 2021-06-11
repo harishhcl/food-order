@@ -1,7 +1,8 @@
 package com.hcl.foodorder.search.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,35 +29,35 @@ public class DSLSearchController {
 
     //Name And Quantity
     @GetMapping("/nameandquantity/{name}/{quantity}")
-    public SearchHits<MenuItem> getProductsByNameAndQuantity(
+    public List<MenuItem> getProductsByNameAndQuantity(
             @PathVariable String name, @PathVariable int quantity){
         return menuItemsService.searchMultiField(name, quantity);
     }
 
     //By itemName specifically for wildcard characters
     @GetMapping("/wildcard/{searchString}")
-    public SearchHits<MenuItem> getMenuNameSearchData(
+    public List<MenuItem> getMenuNameSearchData(
             @PathVariable String searchString){
         return menuItemsService.getMenuNameSearchData(searchString);
     }
 
     //Descriptions
     @GetMapping("/description/{descriptions}")
-    public SearchHits<MenuItem> getMenuItemsByDescriptions(
+    public List<MenuItem> getMenuItemsByDescriptions(
             @PathVariable String descriptions){
         return menuItemsService.getMenuItemsByDescriptions(descriptions);
     }
 
     //By restaurantId Or ItemId
     @GetMapping("/restaurantIdOrItemId/{id}")
-    public SearchHits<MenuItem> getMenuItemsByRestaurantIdOrItemId(
+    public List<MenuItem> getMenuItemsByRestaurantIdOrItemId(
             @PathVariable Long id){
         return menuItemsService.multiMatchQuery(id);
     }
 
     //Items price range
     @GetMapping("/itemsPriceRange/{priceMin}/{priceMax}")
-    public SearchHits<MenuItem> getProductsByPriceRange(
+    public List<MenuItem> getProductsByPriceRange(
             @PathVariable Double priceMin, @PathVariable Double priceMax){
         return menuItemsService.getMenuItemsByPriceRange(priceMin, priceMax);
     }

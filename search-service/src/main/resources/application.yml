@@ -1,14 +1,3 @@
-
-## Local Elasticsearch config
-###spring.data.elasticsearch.cluster-nodes=localhost:9300
-#spring.data.elasticsearch.cluster-name=elasticsearch
-#
-#elasticsearch.index.name=items_index
-#elasticsearch.items.type=items
-#
-## App config
-#server.port=8102
-#spring.application.name=BootElastic
 elasticsearch:
   items:
     type: items
@@ -38,9 +27,10 @@ spring:
       repositories:
         enabled: true
 server:
-  port: 8083
+  port: 8086
   
 eureka: 
    client: 
       serviceUrl: 
-         defaultZone: http://7fb6b1eda5c4445eaf6a.eastus.aksapp.io/eureka       
+         #defaultZone: http://7fb6b1eda5c4445eaf6a.eastus.aksapp.io/eureka 
+         defaultZone: http://localhost:8081/eureka

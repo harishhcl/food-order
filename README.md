@@ -1,73 +1,182 @@
 
 ## Swagger API's Documentation
+    
+    Customer    -    http://localhost:8082/swagger-ui.html 
+    Restaurant  -    http://localhost:8083/swagger-ui.html 
+    Order       -    http://localhost:8084/swagger-ui.html 
+    Driver      -    http://localhost:8085/swagger-ui.html 
+    Search      -    http://localhost:8086/swagger-ui.html 
+    Invoice     -    http://localhost:8087/swagger-ui.html 
 
-    Restaurant  -    http://localhost:8082/swagger-ui.html 
-    Order       -    http://localhost:8085/swagger-ui.html 
-    Invoice     -    http://localhost:8086/swagger-ui.html 
-    Customer    -    http://localhost:9096/swagger-ui.html 
-    Driver      -    http://localhost:9095/swagger-ui.html 
-
+## Restaurant Service
+## Create New Restaurant
+### URL : http://localhost:8083/restaurants/v1/create
+### Request :
+    {
+      "id": 202110,
+      "name": "Bhagini Restaurant",
+      "description": "Non Veg Restaurant",
+      "mobileNumber": "9876543210",
+      "address": {
+        "id": 202110,
+        "type": "RESTAURANT",
+        "street": "Marathahalli",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560038",
+        "lat": "17.98765",
+        "lon": "9.126541"
+      },
+      "isActive": true,
+      "isOpen": true
+    }
+### Response :
+    {
+      "id": 202110,
+      "name": "Bhagini Restaurant",
+      "description": "Non Veg Restaurant",
+      "mobileNumber": "9876543210",
+      "address": {
+        "id": 202110,
+        "type": "RESTAURANT",
+        "street": "Marathahalli",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560038",
+        "lat": "17.98765",
+        "lon": "9.126541"
+      },
+      "isActive": true,
+      "isOpen": true
+    }
+    
+## Get Restaurant by Restaurant ID
+### URL : http://localhost:8083/restaurants/v1/get/202110
+### Request :
+    /restaurants/v1/get/{restaurantId}
+### Response :
+    {
+      "id": 202110,
+      "name": "Bhagini Restaurant",
+      "description": "Non Veg Restaurant",
+      "mobileNumber": "9876543210",
+      "address": {
+        "id": 202110,
+        "type": "RESTAURANT",
+        "street": "Marathahalli",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "pincode": "560038",
+        "lat": "17.98765",
+        "lon": "9.126541"
+      },
+      "isActive": true,
+      "isOpen": true
+    }
+## Create Restaurant Menu Items
+### URL :   http://localhost:8083/restaurants/v1/create/{restaurantId}/menu
+### Request :
+    [
+      {
+        "id": 2021101,
+        "restaurantId": 202110,
+        "name": "Chick Biryani",
+        "description": "Non Veg Spicy Chicken Biryani",
+        "price": 300,
+        "quantity": 1,
+        "isAvailable": true
+      }
+    ]
+### Response : 
+    [
+      {
+        "id": 2021101,
+        "restaurantId": 202110,
+        "name": "Chick Biryani",
+        "description": "Non Veg Spicy Chicken Biryani",
+        "price": 300,
+        "quantity": 1,
+        "isAvailable": true
+      }
+    ]
+ ## Get the Restaurant Menu
+ ### URL : http://localhost:8083/restaurants/v1/create/202110/menu
+ ### Request : 202110
+ ### Response :
+     [
+      {
+        "id": 2021101,
+        "restaurantId": 202110,
+        "name": "Chick Biryani",
+        "description": "Non Veg Spicy Chicken Biryani",
+        "price": 300,
+        "quantity": 1,
+        "isAvailable": true
+      }
+    ]
+     
 ## Customer Service
-### Create 
-    http://localhost:9096/customers/v1/create
+## Create New Customer
+### URL : http://localhost:8082/customers/v1/create
 ### Request
     {
-      "id": 90001,
+      "id": 202010,
       "name": "Harish",
-      "email": "harish@hcl.com",
-      "mobileNumber": "9090909090",
+      "email": "harish@gmail.com",
+      "mobileNumber": "9988776655",
       "adress": {
-        "id": 9001,
+        "id": 202010,
         "type": "CUSTOMER",
-        "street": "BTM Layout 1st Stage",
+        "street": "Munekollala,Marathahalli",
         "city": "Bangalore",
         "state": "Karnataka",
-        "pincode": "560029",
-        "lat": "12.91400",
-        "lon": "77.62470"
+        "pincode": "560038",
+        "lat": "17.98765",
+        "lon": "9.12345"
       },
       "isActive": true
     }
 ### Response
-    {
-      "id": 90001,
+     {
+      "id": 202010,
       "name": "Harish",
-      "email": "harish@hcl.com",
-      "mobileNumber": "9090909090",
+      "email": "harish@gmail.com",
+      "mobileNumber": "9988776655",
       "adress": {
-        "id": 9001,
+        "id": 202010,
         "type": "CUSTOMER",
-        "street": "BTM Layout 1st Stage",
+        "street": "Munekollala,Marathahalli",
         "city": "Bangalore",
         "state": "Karnataka",
-        "pincode": "560029",
-        "lat": "12.91400",
-        "lon": "77.62470"
+        "pincode": "560038",
+        "lat": "17.98765",
+        "lon": "9.12345"
       },
       "isActive": true
     }
-### Get Customer Details by Mobile number
-    http://localhost:9096/customers/v1/get/9090909090
+    
+## Get Customer Details by Mobile number
+### URL : http://localhost:8082/customers/v1/get/9988776655
 ### Response
     {
-      "id": 90001,
+      "id": 202010,
       "name": "Harish",
-      "email": "harish@hcl.com",
-      "mobileNumber": "9090909090",
+      "email": "harish@gmail.com",
+      "mobileNumber": "9988776655",
       "adress": {
-        "id": 9001,
+        "id": 202010,
         "type": "CUSTOMER",
-        "street": "BTM Layout 1st Stage",
+        "street": "Munekollala,Marathahalli",
         "city": "Bangalore",
         "state": "Karnataka",
-        "pincode": "560029",
-        "lat": "12.91401",
-        "lon": "77.62470"
+        "pincode": "560038",
+        "lat": "17.98765",
+        "lon": "9.12345"
       },
       "isActive": true
     }
- ### Update Customer Details
-    http://localhost:9096/customers/v1/update/9090909090
+ ## Update Customer Details
+ ### URL : http://localhost:9096/customers/v1/update/9090909090
  ### Request
      {
       "id": 90001,

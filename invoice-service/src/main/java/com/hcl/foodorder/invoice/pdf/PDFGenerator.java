@@ -42,6 +42,7 @@ public class PDFGenerator {
 	 * @throws IOException
 	 */
 	public void generatePDFReport(Order order) throws DocumentException, IOException {
+		logger.info("Report has been started ");
 		Document document = new Document();
 		PdfWriter.getInstance(document, new FileOutputStream(fileBaseLocation + order.getOrderNumber() + ".pdf"));
 		document.open();
