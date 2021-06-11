@@ -1,4 +1,8 @@
 elasticsearch:
+  host: enterprise-search-deployment-e4a55d.es.westus2.azure.elastic-cloud.com
+  userName: elastic
+  passWord: Qf32Hd231kQvAsdc9BDZDlyR
+  port: 9243
   items:
     type: items
   index:
